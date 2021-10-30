@@ -1,6 +1,7 @@
 ﻿window.onload = function () {
   const container = document.getElementById("container");
   let points = {};
+  let elm;
   /**************/
   function randomBg() {
     return `rgb(${Math.floor(Math.random() * 255)},${Math.floor(
@@ -26,12 +27,12 @@
     }
   };
   let mouseMove = (e) => {
-    if (e.target.className == "some-div") {
-      e.target.style.left = `${
-        e.clientX - Math.floor(e.target.offsetWidth / 2)
+    if (elm.className == "some-div") {
+      elm.style.left = `${
+        e.clientX - Math.floor(elm.offsetWidth / 2)
       }px`;
-      e.target.style.top = `${
-        e.clientY - Math.floor(e.target.offsetHeight / 2)
+      elm.style.top = `${
+        e.clientY - Math.floor(elm.offsetHeight / 2)
       }px`;
     }
   };
@@ -39,6 +40,7 @@
   container.onmousedown = (e) => {
     points["startX"] = e.clientX;
     points["startY"] = e.clientY;
+    elm = e.target !== e.currentTarget ? e.target : null;
     container.onmouseup = mouseUp;
     container.onmousemove = e.ctrlKey ? mouseMove : null;
   };
